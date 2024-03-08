@@ -1,11 +1,74 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
-    <exclude-output />
-    <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
-    </content>
-    <orderEntry type="inheritedJdk" />
-    <orderEntry type="sourceFolder" forTests="false" />
-  </component>
-</module>
+public class exe {import java.util.Scanner;
+
+    public class SimpleAgenda {
+        private String[] contactos = new String[10];
+
+        public void agregarContacto() {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("Ingrese un contacto a agregar:");
+            String nuevoContacto = scanner.nextLine();
+
+            if (buscarContacto(nuevoContacto)) {
+                System.out.println("Ya se ha agregado anteriormente.");
+            } else {
+                for (int i = 0; i < contactos.length; i++) {
+                    if (contactos[i] == null) {
+                        contactos[i] = nuevoContacto;
+                        System.out.println("Agregado satisfactoriamente.");
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void removerContacto() {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("Ingrese el contacto a remover:");
+            String contactoARemover = scanner.nextLine();
+
+            if (buscarContacto(contactoARemover)) {
+                for (int i = 0; i < contactos.length; i++) {
+                    if (contactos[i] != null && contactos[i].equals(contactoARemover)) {
+                        contactos[i] = null;
+                        System.out.println("El contacto " + contactoARemover + " fue removido exitosamente!");
+                        break;
+                    }
+                }
+            } else {
+                System.out.println("No existe tal contacto.");
+            }
+        }
+
+        public void mostrarContacto() {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("Ingrese el contacto a mostrar:");
+            String contactoAMostrar = scanner.nextLine();
+
+            if (buscarContacto(contactoAMostrar)) {
+                System.out.println("El contacto " + contactoAMostrar);
+            } else {
+                System.out.println("No existen registros de este contacto.");
+            }
+        }
+
+        public void mostrarContactos() {
+            System.out.println("Mostrando contactos...");
+            for (String contacto : contactos) {
+                if (contacto != null) {
+                    System.out.println(contacto);
+                }
+            }
+        }
+
+        private boolean buscarContacto(String contacto) {
+            for (String c : contactos) {
+                if (c != null && c.equals(contacto)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+}
